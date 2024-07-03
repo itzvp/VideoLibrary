@@ -1,16 +1,14 @@
-// src/pages/BookmarkedPage.tsx
-"use client";
 import React from "react";
 import { Video } from "@/types/Video";
 import VideoItem from "@/components/VideoItem";
 
 interface BookmarkedPageProps {
-  videos: Video[];
+  videos?: Video[]; // Make videos optional and provide a default empty array
   onToggleBookmark: (id: string) => void;
 }
 
 const BookmarkedPage: React.FC<BookmarkedPageProps> = ({
-  videos,
+  videos = [], // Default value for videos
   onToggleBookmark,
 }) => {
   const bookmarkedVideos = videos.filter((video) => video.isBookmarked);
@@ -27,7 +25,7 @@ const BookmarkedPage: React.FC<BookmarkedPageProps> = ({
           />
         ))
       ) : (
-        <p>No bookmarked videos</p>
+        <p>No bookmarked videos available</p>
       )}
     </div>
   );
