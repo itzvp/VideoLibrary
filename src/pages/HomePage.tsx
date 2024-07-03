@@ -61,6 +61,7 @@
 // export default HomePage;
 
 // src/pages/HomePage.tsx
+"use client";
 import React, { useState } from "react";
 import { Video } from "@/types/Video";
 import VideoItem from "@/components/VideoItem";

@@ -1,4 +1,5 @@
 // src/pages/BookmarkedPage.tsx
+"use client";
 import React from "react";
 import { Video } from "@/types/Video";
 import VideoItem from "@/components/VideoItem";
