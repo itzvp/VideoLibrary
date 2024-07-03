@@ -19,7 +19,11 @@
 //         {video.isBookmarked ? "Unbookmark" : "Bookmark"}
 //       </button>
 //       {isPlaying && (
-//         <VideoPlayer url={video.url} onClose={() => setIsPlaying(false)} />
+//         <VideoPlayer
+//           url={video.url}
+//           file={video.file}
+//           onClose={() => setIsPlaying(false)}
+//         />
 //       )}
 //     </div>
 //   );
@@ -27,7 +31,6 @@
 
 // export default VideoItem;
 
-// src/components/VideoItem.tsx
 import React, { useState } from "react";
 import { Video } from "@/types/Video";
 import VideoPlayer from "./VideoPlayer";

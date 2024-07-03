@@ -1,4 +1,5 @@
 // // src/pages/HomePage.tsx
+// "use client";
 // import React, { useState } from "react";
 // import { Video } from "@/types/Video";
 // import VideoItem from "@/components/VideoItem";
@@ -16,17 +17,27 @@
 // }) => {
 //   const [title, setTitle] = useState("");
 //   const [url, setUrl] = useState("");
+//   const [file, setFile] = useState<File | undefined>(undefined);
 
 //   const handleAddVideo = () => {
 //     const newVideo: Video = {
-//       id: Math.random().toString(36).substr(2, 9),
+//       id: Math.random().toString(36).substring(2, 11),
 //       title,
 //       url,
+//       file,
 //       isBookmarked: false,
 //     };
 //     onAddVideo(newVideo);
 //     setTitle("");
 //     setUrl("");
+//     setFile(undefined);
+//   };
+
+//   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     if (event.target.files && event.target.files[0]) {
+//       setFile(event.target.files[0]);
+//       setUrl(""); // Clear the URL if a file is selected
+//     }
 //   };
 
 //   return (
@@ -45,6 +56,7 @@
 //           value={url}
 //           onChange={(e) => setUrl(e.target.value)}
 //         />
+//         <input type="file" accept="video/*" onChange={handleFileChange} />
 //         <button onClick={handleAddVideo}>Add Video</button>
 //       </div>
 //       {videos.map((video) => (
@@ -60,7 +72,6 @@
 
 // export default HomePage;
 
-// src/pages/HomePage.tsx
 "use client";
 import React, { useState } from "react";
 import { Video } from "@/types/Video";
