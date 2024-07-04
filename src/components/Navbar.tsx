@@ -20,7 +20,7 @@ import Link from "next/link";
 const Navbar: React.FC = () => {
   return (
     <nav>
-      <Link href="/">Home</Link>
+      {/* <Link href="/">Home</Link> */}
       {/* <Link href="/bookmarked">Bookmarked</Link> */}
     </nav>
   );
