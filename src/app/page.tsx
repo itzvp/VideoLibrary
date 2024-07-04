@@ -1,7 +1,62 @@
+// "use client";
+// import dynamic from "next/dynamic";
+// import React, { useState } from "react";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Navbar from "@/components/Navbar";
+// import HomePage from "@/pages/HomePage";
+// import BookmarkedPage from "@/pages/BookmarkedPage";
+// import { Video } from "@/types/Video";
+
+// const App: React.FC = () => {
+//   const [videos, setVideos] = useState<Video[]>([]);
+
+//   const handleAddVideo = (video: Video) => {
+//     setVideos([...videos, video]);
+//   };
+
+//   const handleToggleBookmark = (id: string) => {
+//     setVideos(
+//       videos.map((video) =>
+//         video.id === id
+//           ? { ...video, isBookmarked: !video.isBookmarked }
+//           : video
+//       )
+//     );
+//   };
+
+//   return (
+//     <Router>
+//       <Navbar />
+//       <Routes>
+//         <Route
+//           path="/"
+//           element={
+//             <HomePage
+//               videos={videos}
+//               onAddVideo={handleAddVideo}
+//               onToggleBookmark={handleToggleBookmark}
+//             />
+//           }
+//         />
+//         <Route
+//           path="/bookmarked"
+//           element={
+//             <BookmarkedPage
+//               videos={videos}
+//               onToggleBookmark={handleToggleBookmark}
+//             />
+//           }
+//         />
+//       </Routes>
+//     </Router>
+//   );
+// };
+
+// export default App;
 "use client";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HomePage from "@/pages/HomePage";
 import BookmarkedPage from "@/pages/BookmarkedPage";
@@ -9,6 +64,7 @@ import { Video } from "@/types/Video";
 
 const App: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
+  const [view, setView] = useState<"all" | "bookmarked">("all");
 
   const handleAddVideo = (video: Video) => {
     setVideos([...videos, video]);
@@ -24,35 +80,31 @@ const App: React.FC = () => {
     );
   };
 
+  const handleViewChange = (newView: "all" | "bookmarked") => {
+    setView(newView);
+  };
+
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              videos={videos}
-              onAddVideo={handleAddVideo}
-              onToggleBookmark={handleToggleBookmark}
-            />
-          }
+      <Navbar onViewChange={handleViewChange} />
+      {view === "all" ? (
+        <HomePage
+          videos={videos}
+          onAddVideo={handleAddVideo}
+          onToggleBookmark={handleToggleBookmark}
         />
-        <Route
-          path="/bookmarked"
-          element={
-            <BookmarkedPage
-              videos={videos}
-              onToggleBookmark={handleToggleBookmark}
-            />
-          }
+      ) : (
+        <BookmarkedPage
+          videos={videos}
+          onToggleBookmark={handleToggleBookmark}
         />
-      </Routes>
+      )}
     </Router>
   );
 };
 
 export default App;
+
 // "use client";
 // import React, { useState } from "react";
 // import Navbar from "@/components/Navbar";
