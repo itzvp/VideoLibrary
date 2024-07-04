@@ -17,8 +17,14 @@ const HomePage: React.FC<HomePageProps> = ({
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | undefined>(undefined);
+  const [error, setError] = useState<string>("");
 
   const handleAddVideo = () => {
+    if (!url && !file) {
+      setError("Please add a video URL or file");
+      return;
+    }
+
     const newVideo: Video = {
       id: Math.random().toString(36).substring(2, 11),
       title,
@@ -30,6 +36,7 @@ const HomePage: React.FC<HomePageProps> = ({
     setTitle("");
     setUrl("");
     setFile(undefined);
+    setError("");
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +64,7 @@ const HomePage: React.FC<HomePageProps> = ({
         />
         <input type="file" accept="video/*" onChange={handleFileChange} />
         <button onClick={handleAddVideo}>Add Video</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
       {videos.map((video) => (
         <VideoItem
